@@ -11,11 +11,11 @@ CORS(app)
 # A list of words
 words = ["apple", "banana", "cherry", "date", "elderberry", "fig", "grape", "honeydew", "ice", "jackfruit", "kiwi", "lemon", "mango", "nectarine", "orange", "pineapple", "quince", "raspberry", "strawberry", "tangerine", "ugli", "victoria", "watermelon", "xigua", "yellow", "zucchini"]
 
-@app.route("/hello", methods=["GET"])
+@app.route("/api/hello", methods=["GET"])
 def say_hello():
     return jsonify({"msg": "Hello from Flask"})
 
-@app.route('/data', methods=['POST'])
+@app.route('/api/data', methods=['POST'])
 def upload_file():
     if 'file' not in request.files:
         return jsonify({'error': 'No file part in the request'}), 400
@@ -33,7 +33,7 @@ def upload_file():
         return jsonify({'error': 'Unsupported file type'}), 400
 
 
-@app.route('/infer', methods=['POST'])
+@app.route('/api/infer', methods=['POST'])
 def classify():
     if 'file' not in request.files:
         return jsonify({'error': 'No file part in the request'}), 400
@@ -49,15 +49,15 @@ def classify():
 
     return random_string, 200
 
-@app.route('/training', methods=['POST'])
+@app.route('/api/training', methods=['POST'])
 def starttraining():
     return jsonify({'message': 'OK'}), 200
 
-@app.route('/serving', methods=['POST'])
+@app.route('/api/serving', methods=['POST'])
 def startserving():
     return jsonify({'message': 'OK'}), 200
 
-@app.route('/serving', methods=['DELETE'])
+@app.route('/api/serving', methods=['DELETE'])
 def stopserving():
     return jsonify({'message': 'OK'}), 200
 

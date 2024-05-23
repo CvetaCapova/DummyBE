@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: dummybe:latest
+          image: ghcr.io/cvetacapova/dummybe:main
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
