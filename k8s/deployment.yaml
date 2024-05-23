@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    name: backend
+  name: backend
+spec:
+  selector:
+    matchLabels:
+      app: backend
+      track: stable
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: backend
+        track: stable
+    spec:
+      containers:
+        - name: backend
+          image: dummybe:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 5000

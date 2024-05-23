@@ -11,6 +11,9 @@ CORS(app)
 # A list of words
 words = ["apple", "banana", "cherry", "date", "elderberry", "fig", "grape", "honeydew", "ice", "jackfruit", "kiwi", "lemon", "mango", "nectarine", "orange", "pineapple", "quince", "raspberry", "strawberry", "tangerine", "ugli", "victoria", "watermelon", "xigua", "yellow", "zucchini"]
 
+@app.route("/hello", methods=["GET"])
+def say_hello():
+    return jsonify({"msg": "Hello from Flask"})
 
 @app.route('/data', methods=['POST'])
 def upload_file():
@@ -23,7 +26,7 @@ def upload_file():
         return jsonify({'error': 'No selected file'}), 400
 
     if file and file.filename.endswith('.zip'):
-        file.save(os.path.join('/home/cveta/Uni/2.Semester/CN/dummyBE/', file.filename))
+        file.save(file.filename)
         print('File saved successfully!')
         return jsonify({'message': 'File successfully uploaded'}), 200
     else:
@@ -40,7 +43,7 @@ def classify():
     if file.filename == '':
         return jsonify({'error': 'No selected file'}), 400
 
-    file.save(os.path.join('/home/cveta/Uni/2.Semester/CN/dummyBE/', file.filename))
+    file.save(file.filename)
     # Generate a random string of length 10
     random_string = random.choice(words)
 
@@ -59,4 +62,5 @@ def stopserving():
     return jsonify({'message': 'OK'}), 200
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Please do not set debug=True in production
+    app.run(host="0.0.0.0", port=5000, debug=True)
